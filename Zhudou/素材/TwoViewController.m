@@ -17,7 +17,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     animationTableView = [[UITableView alloc]init];
+    
+    musicArr = [[NSMutableArray alloc] init];
     
     animationTableView.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height - 144);
     
@@ -26,11 +29,40 @@
     [animationTableView setDataSource:self];
     
     [self.view addSubview:animationTableView];
+    
+    NSString *urlStr = @"material/materiallist.do";
+    
+    [IKHttpTool postWithURL:urlStr params:nil success:^(id JSON)
+     {
+         NSLog(@"JSON = %@",JSON);
+         
+         [musicArr removeAllObjects];
+         
+         NSArray *arr = [JSON valueForKey:@"res_data"];
+         
+         for (NSDictionary *dc  in arr) {
+             
+             NSString *str = [dc objectForKey:@"catalog"];
+             
+             if (str.intValue == 2)
+             {
+                 [musicArr addObject:dc];
+             }
+         }
+         
+         [animationTableView reloadData];
+         
+     }
+                    failure:^(NSError *error)
+     {
+         NSLog(@"error%@",error);
+     }];
+
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return musicArr.count;
 }
 
 //改变行的高度
@@ -63,7 +95,10 @@
 //    [playImageView addTarget:self action:@selector(cellMvPlayButClick:) forControlEvents:UIControlEventTouchUpInside];
     
     //设置button填充图片
-    [playImageView setBackgroundImage:[UIImage imageNamed:@"宝典图片.png"] forState:UIControlStateNormal];
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://182.92.96.117:8080/zhudou/%@",[[musicArr objectAtIndex:row] valueForKey:@"titlePic"]]];
+
+    [playImageView setBackgroundImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:url]] forState:UIControlStateNormal];
     
     [cell addSubview:playImageView];
     
@@ -72,7 +107,7 @@
     
     animationTitle.font = [UIFont systemFontOfSize: 13.0];
     
-    animationTitle.text = @"球球讲故事球球讲故事";
+    animationTitle.text = [[musicArr objectAtIndex:row] valueForKey:@"title"];
     
     [cell addSubview:animationTitle];
     
@@ -83,7 +118,7 @@
     
     animationTime.textColor = [UIColor grayColor];
     
-    animationTime.text = @"时长: 20m";
+    animationTime.text = [NSString stringWithFormat:@"时长:%@",[[musicArr objectAtIndex:row] valueForKey:@"mLength"]];
     
     [cell addSubview:animationTime];
     
@@ -100,7 +135,8 @@
     
     releaseTimeTitle.font = [UIFont systemFontOfSize: 11.0];
     
-    releaseTimeTitle.text = @"半个小时前";
+    releaseTimeTitle.text = [[musicArr objectAtIndex:row] valueForKey:@"createDate"];
+    releaseTimeTitle.text = [releaseTimeTitle.text substringWithRange:NSMakeRange(releaseTimeTitle.text.length - 5,5)];
     
     [cell addSubview:releaseTimeTitle];
     
@@ -127,7 +163,7 @@
     
     saveTimesTitle.font = [UIFont systemFontOfSize: 11.0];
     
-    saveTimesTitle.text = @"18";
+    saveTimesTitle.text = [NSString stringWithFormat:@"%@",[[musicArr objectAtIndex:row] valueForKey:@"favCount"]];
     
     [cell addSubview:saveTimesTitle];
     
@@ -154,7 +190,7 @@
     
     upDataTitle.font = [UIFont systemFontOfSize: 11.0];
     
-    upDataTitle.text = @"6";
+    upDataTitle.text = [NSString stringWithFormat:@"%@",[[musicArr objectAtIndex:row] valueForKey:@"downloadCount"]];
     
     [cell addSubview:upDataTitle];
     

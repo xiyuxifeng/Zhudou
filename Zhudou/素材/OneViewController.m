@@ -18,24 +18,7 @@
     
     [super viewDidLoad];
     
-    [self loadAnimationView];
-    
-    [self loadMusicView];
-    
-    self.Segmented_AM.frame = CGRectMake(([[UIScreen mainScreen] bounds].size.width - self.Segmented_AM.frame.size.width) / 2, 5, self.Segmented_AM.frame.size.width, 25);
- 
-    
-}
-
-//加载动画界面
-- (void)loadAnimationView
-{
-    
-}
-
-- (void)loadMusicView
-{
-    
+    musicArr = [[NSMutableArray alloc] init];
     
     musicTableView = [[UITableView alloc]init];
     
@@ -49,6 +32,51 @@
     
     [self.view addSubview:musicTableView];
     
+    [self loadAnimationView];
+    
+    [self loadMusicView];
+    
+    NSString *urlStr = @"material/materiallist.do";
+    
+    [IKHttpTool postWithURL:urlStr params:nil success:^(id JSON)
+     {
+         NSLog(@"JSON = %@",JSON);
+         
+         [musicArr removeAllObjects];
+         
+         NSArray *arr = [JSON valueForKey:@"res_data"];
+         
+         for (NSDictionary *dc  in arr) {
+             
+             NSString *str = [dc objectForKey:@"catalog"];
+             
+             if (str.intValue == 1)
+             {
+                 [musicArr addObject:dc];
+             }
+         }
+         
+         [musicTableView reloadData];
+         
+     }
+    failure:^(NSError *error)
+     {
+         NSLog(@"error%@",error);
+     }];
+    
+    self.Segmented_AM.frame = CGRectMake(([[UIScreen mainScreen] bounds].size.width - self.Segmented_AM.frame.size.width) / 2, 5, self.Segmented_AM.frame.size.width, 25);
+    
+    
+}
+
+//加载动画界面
+- (void)loadAnimationView
+{
+    
+}
+
+- (void)loadMusicView
+{
     musicTableView.hidden = YES;
     
     musicPlayView = [[UIView alloc]initWithFrame:CGRectMake(0, [[UIScreen mainScreen] bounds].size.height - 175 - 44, [[UIScreen mainScreen] bounds].size.width, 75)];
@@ -56,7 +84,7 @@
     musicPlayView.backgroundColor = [UIColor colorWithRed:240.0f/255.0f green:240.0f/255.0f blue:240.0f/255.0f alpha:0.5];
     
     [self.view addSubview:musicPlayView];
-
+    
     //是否收藏过？
     UIImageView *music_ImageView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 12, 50, 50)];
     
@@ -82,16 +110,17 @@
     [musicPlayView addSubview:AVPlayerTime];
     
     NSError* err;
-    
+     
     musicPlayer = [[AVAudioPlayer alloc]
-              initWithContentsOfURL:[NSURL fileURLWithPath:
-                                     [[NSBundle mainBundle]pathForResource:
-                                      @"蔡依林 - 日不落" ofType:@"m4a"
-                                                               inDirectory:@"/"]]
-              error:&err ];//使用本地URL创建
+                   initWithContentsOfURL:[NSURL fileURLWithPath:
+                                          [[NSBundle mainBundle]pathForResource:
+                                           @"蔡依林 - 日不落" ofType:@"m4a"
+                                                                    inDirectory:@"/"]]
+                   error:&err ];//使用本地URL创建
     
     [musicPlayer prepareToPlay];//分配播放所需的资源，并将其加入内部播放队列
     
+
     //初始化一个播放进度条
     progressV = [[UIProgressView alloc] initWithFrame:CGRectMake(82, 63, 160, 20)];
     
@@ -150,7 +179,7 @@
     
     //显示控件
     [musicPlayView addSubview:jin];
-
+    
     musicPlayView.hidden = YES;
     
     //用NSTimer来监控音频播放进度
@@ -265,7 +294,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return musicArr.count;
 }
 
 //改变行的高度
@@ -282,12 +311,14 @@
     
     static NSString *CellWithIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellWithIdentifier];
+    
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellWithIdentifier];
     }
+    
     NSUInteger row = [indexPath row];
     
-    if (tableView.tag == 1) 
+    if (tableView.tag == 1)
     {
         //是否收藏过？
         UIButton *cell_shouCang_ImageView = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -312,7 +343,7 @@
         
         musicTitle.font = [UIFont systemFontOfSize: 13.0];
         
-        musicTitle.text = @"我是一个小小的石头";
+        musicTitle.text = [[musicArr objectAtIndex:row] valueForKey:@"title"];
         
         [cell addSubview:musicTitle];
         
@@ -329,7 +360,8 @@
         
         releaseTimeTitle.font = [UIFont systemFontOfSize: 11.0];
         
-        releaseTimeTitle.text = @"半个小时前";
+        releaseTimeTitle.text = [[musicArr objectAtIndex:row] valueForKey:@"createDate"];
+        releaseTimeTitle.text = [releaseTimeTitle.text substringWithRange:NSMakeRange(releaseTimeTitle.text.length - 5,5)];
         
         [cell addSubview:releaseTimeTitle];
         
@@ -356,7 +388,7 @@
         
         upDataTitle.font = [UIFont systemFontOfSize: 11.0];
         
-        upDataTitle.text = @"6";
+        upDataTitle.text = [NSString stringWithFormat:@"%@",[[musicArr objectAtIndex:row] valueForKey:@"downloadCount"]];
         
         [cell addSubview:upDataTitle];
         
@@ -430,13 +462,13 @@
     NSLog(@"one dealloc");
 }
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
  
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
+
 @end

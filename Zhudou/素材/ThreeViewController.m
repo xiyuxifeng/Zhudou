@@ -16,24 +16,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    UICollectionViewFlowLayout *flowLayout= [[UICollectionViewFlowLayout alloc]init];
-//    flowLayout.itemSize = CGSizeMake(([[UIScreen mainScreen] bounds].size.width - 45)/3, [[UIScreen mainScreen] bounds].size.height > 640 ? 140 :120);
-//    flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;//垂直滚动
     
-    UICollectionViewFlowLayout*layout=[[UICollectionViewFlowLayout alloc] init];
+    musicArr = [[NSMutableArray alloc] init];
+    
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     
     layout.itemSize = CGSizeMake(([[UIScreen mainScreen] bounds].size.width - 45)/3, [[UIScreen mainScreen] bounds].size.height > 640 ? 140 :120);
     
-    // 设置cell之间的水平间距
-    //    layout.minimumInteritemSpacing = 10;
-    // 设置cell之间的垂直间距
-    //    layout.minimumLineSpacing = 10;
-    // 设置四周的内边距
     layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
     
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;//垂直滚动
-    
-    //    [layout setHeaderReferenceSize:CGSizeMake(width - 20, 44)];
     
     UICollectionView *studyBook = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height - 144) collectionViewLayout:layout];
     
@@ -48,23 +40,41 @@
     
     [self.view addSubview:studyBook];
     
-//    //注册
-//    NSString *CollectionCell = @"CollectionCell";
-//    
-//    [studyBook registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:CollectionCell];
-//    self.collectionView.collectionViewLayout = flowLayout;
-//    self.collectionView.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height - 144);
-//    self.collectionView.delegate = self;
-//    
-//    self.collectionView.dataSource = self;
-//    // Do any additional setup after loading the view from its nib.
     [studyBook registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"myCell"];
+    
+    NSString *urlStr = @"material/materiallist.do";
+    
+    [IKHttpTool postWithURL:urlStr params:nil success:^(id JSON)
+     {
+         NSLog(@"JSON = %@",JSON);
+         
+         [musicArr removeAllObjects];
+         
+         NSArray *arr = [JSON valueForKey:@"res_data"];
+         
+         for (NSDictionary *dc  in arr) {
+             
+             NSString *str = [dc objectForKey:@"catalog"];
+             
+             if (str.intValue == 3)
+             {
+                 [musicArr addObject:dc];
+             }
+         }
+         
+         [studyBook reloadData];
+         
+     }
+                    failure:^(NSError *error)
+     {
+         NSLog(@"error%@",error);
+     }];
 }
 
 //定义展示的UICollectionViewCell的个数
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 30;
+    return musicArr.count;
 }
 
 //定义展示的Section的个数
@@ -83,7 +93,9 @@
     
     UIImageView *releaseTimeImageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 77, 77)];
     
-    releaseTimeImageView.image = [UIImage imageNamed:@"宝典图片.png"];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://182.92.96.117:8080/zhudou/%@",[[musicArr objectAtIndex:[indexPath row]] valueForKey:@"titlePic"]]];
+    
+    releaseTimeImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
     
     [cell addSubview:releaseTimeImageView];
     

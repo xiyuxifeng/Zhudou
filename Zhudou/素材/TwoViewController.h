@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "MBProgressHUD+MJ.h"
+#import "IKHttpTool.h"
 
 @interface TwoViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate>
 {
     UITableView *animationTableView;
     UIAlertView *customAlertView;
+    NSMutableArray *musicArr;
 }
 
 @end

@@ -19,7 +19,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    tableViewDataArr = [[NSArray alloc] init];
+    tableViewDataArr = [[NSMutableArray alloc] init];
     
     imageView = [[UIImageView alloc]init];
     scrollView = [[UIScrollView alloc]init];
@@ -56,6 +56,16 @@
     
     [self.view addSubview:tableView];
     
+    NSString *urlStr = @"link";
+    
+    [IKHttpTool postWithURL:urlStr params: @{@"colid":@"4"} success:^(id JSON) {
+                                           NSLog(@"JSON = %@",JSON);
+                                           [tableViewDataArr removeAllObjects];
+                                           tableViewDataArr = [JSON valueForKey:@"res_data"];
+                                           
+                                       } failure:^(NSError *error) {
+                                           NSLog(@"error%@",error);
+                                       }];
 }
 
 - (void)loadScrollViewInfo{

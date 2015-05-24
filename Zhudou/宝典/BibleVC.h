@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IKHttpTool.h"
 
 @interface BibleVC : UIViewController<UITableViewDelegate, UITableViewDataSource>
 {
     UIImageView *imageView;
     UIScrollView *scrollView;
     UITableView *tableView;
-    NSArray *tableViewDataArr;
-    
+    NSMutableArray *tableViewDataArr;
 }
  
 @end

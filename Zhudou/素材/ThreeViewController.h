@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IKHttpTool.h"
 
 @interface ThreeViewController : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout, UIAlertViewDelegate>
 {
     UIAlertView *customAlertView;
+    NSMutableArray *musicArr;
 } 
 
 @end

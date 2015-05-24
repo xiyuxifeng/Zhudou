@@ -44,7 +44,7 @@
     
     mgr.requestSerializer = [AFHTTPRequestSerializer serializer];
     mgr.responseSerializer = [AFHTTPResponseSerializer serializer];
-    mgr.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/x-javascript", @"text/html", nil];
+
     mgr.requestSerializer.timeoutInterval = 10.0;
     
     // 1.1封装参数
