@@ -103,11 +103,11 @@
     
     [musicPlayView addSubview:musicTitle];
     
-    AVPlayerTime = [[UILabel alloc]initWithFrame:CGRectMake(250, 55, 100, 20)];
+    AVPlayerTime = [[UILabel alloc]initWithFrame:CGRectMake([[UIScreen mainScreen] bounds].size.width - 100, 33, 100, 20)];
     
     AVPlayerTime.text = @"0.00 / 0.00";
     
-    AVPlayerTime.font = [UIFont systemFontOfSize: 11.0];
+    AVPlayerTime.font = [UIFont systemFontOfSize: 15.0];
     
     [musicPlayView addSubview:AVPlayerTime];
     
@@ -123,7 +123,7 @@
     [musicPlayer prepareToPlay];//分配播放所需的资源，并将其加入内部播放队列
     
     //初始化一个播放进度条
-    progressV = [[UIProgressView alloc] initWithFrame:CGRectMake(82, 65, 160, 20)];
+    progressV = [[UIProgressView alloc] initWithFrame:CGRectMake(82, 63, 160, 20)];
     
     [musicPlayView addSubview:progressV];
     
@@ -527,7 +527,7 @@
         
         playBtn.tag = row;
         
-        playBtn.frame = CGRectMake(260, 15, 30, 30);
+        playBtn.frame = CGRectMake([[UIScreen mainScreen] bounds].size.width - 60, 15, 30, 30);
         
         [playBtn setTitleColor:[UIColor blackColor]forState:UIControlStateNormal];
         

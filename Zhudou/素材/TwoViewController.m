@@ -88,13 +88,13 @@
     [cell addSubview:animationTime];
     
     //发布时间
-    UIImageView *releaseTimeImageView = [[UIImageView alloc]initWithFrame:CGRectMake(210, 10, 20, 20)];
+    UIImageView *releaseTimeImageView = [[UIImageView alloc]initWithFrame:CGRectMake([[UIScreen mainScreen] bounds].size.width - 115, 10, 20, 20)];
     
     releaseTimeImageView.image = [UIImage imageNamed:@"发布时间.png"];
     
     [cell addSubview:releaseTimeImageView];
     
-    UILabel *releaseTimeTitle = [[UILabel alloc]initWithFrame:CGRectMake(235, 10, 100, 20)];
+    UILabel *releaseTimeTitle = [[UILabel alloc]initWithFrame:CGRectMake([[UIScreen mainScreen] bounds].size.width - 90, 10, 100, 20)];
     
     releaseTimeTitle.textColor = [UIColor grayColor];
     
@@ -107,7 +107,7 @@
     //收藏次数
     UIButton *saveTimesImage = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    saveTimesImage.frame = CGRectMake(211, 35, 18, 18);
+    saveTimesImage.frame = CGRectMake([[UIScreen mainScreen] bounds].size.width - 115, 35, 18, 18);
     
     saveTimesImage.tag = row;
     
@@ -121,7 +121,7 @@
     
     [cell addSubview:saveTimesImage];
     
-    UILabel *saveTimesTitle = [[UILabel alloc]initWithFrame:CGRectMake(231, 35, 40, 20)];
+    UILabel *saveTimesTitle = [[UILabel alloc]initWithFrame:CGRectMake([[UIScreen mainScreen] bounds].size.width - 90, 35, 40, 20)];
     
     saveTimesTitle.textColor = [UIColor grayColor];
     
@@ -134,7 +134,7 @@
     //下载次数
     UIButton *upDataImage = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    upDataImage.frame = CGRectMake(271, 35, 18, 18);
+    upDataImage.frame = CGRectMake([[UIScreen mainScreen] bounds].size.width - 50, 35, 18, 18);
     
     upDataImage.tag = row;
     
@@ -148,7 +148,7 @@
     
     [cell addSubview:upDataImage];
     
-    UILabel *upDataTitle = [[UILabel alloc]initWithFrame:CGRectMake(291, 35, 40, 20)];
+    UILabel *upDataTitle = [[UILabel alloc]initWithFrame:CGRectMake([[UIScreen mainScreen] bounds].size.width - 25, 35, 40, 20)];
     
     upDataTitle.textColor = [UIColor grayColor];
     
