@@ -100,6 +100,10 @@
 		0AE62CAC1B11707700EE8FAD /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE62C931B11707700EE8FAD /* UIScrollView+MJExtension.m */; };
 		0AE62CAD1B11707700EE8FAD /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE62C951B11707700EE8FAD /* UIScrollView+MJRefresh.m */; };
 		0AE62CAE1B11707700EE8FAD /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE62C971B11707700EE8FAD /* UIView+MJExtension.m */; };
+		CB0B1C281B11896300AC0F90 /* RSKImageCropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0B1C211B11896300AC0F90 /* RSKImageCropViewController.m */; };
+		CB0B1C291B11896300AC0F90 /* RSKImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0B1C231B11896300AC0F90 /* RSKImageScrollView.m */; };
+		CB0B1C2A1B11896300AC0F90 /* RSKTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0B1C251B11896300AC0F90 /* RSKTouchView.m */; };
+		CB0B1C2B1B11896300AC0F90 /* UIImage+FixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0B1C271B11896300AC0F90 /* UIImage+FixOrientation.m */; };
 		EB4E681E7912B17283ACED33 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60C4B1AE02554ACA725E1F82 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -282,6 +286,15 @@
 		2EDAE907AC764CAD57F1BC09 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		60C4B1AE02554ACA725E1F82 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF0F2A10F35FA8DD250FDE44 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		CB0B1C1F1B11896300AC0F90 /* RSKImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSKImageCropper.h; sourceTree = "<group>"; };
+		CB0B1C201B11896300AC0F90 /* RSKImageCropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSKImageCropViewController.h; sourceTree = "<group>"; };
+		CB0B1C211B11896300AC0F90 /* RSKImageCropViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSKImageCropViewController.m; sourceTree = "<group>"; };
+		CB0B1C221B11896300AC0F90 /* RSKImageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSKImageScrollView.h; sourceTree = "<group>"; };
+		CB0B1C231B11896300AC0F90 /* RSKImageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSKImageScrollView.m; sourceTree = "<group>"; };
+		CB0B1C241B11896300AC0F90 /* RSKTouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSKTouchView.h; sourceTree = "<group>"; };
+		CB0B1C251B11896300AC0F90 /* RSKTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSKTouchView.m; sourceTree = "<group>"; };
+		CB0B1C261B11896300AC0F90 /* UIImage+FixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FixOrientation.h"; sourceTree = "<group>"; };
+		CB0B1C271B11896300AC0F90 /* UIImage+FixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FixOrientation.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -499,6 +512,7 @@
 		0AE62AEB1B101A9F00EE8FAD /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				CB0B1C1E1B11896300AC0F90 /* RSKImageCropper */,
 				0AE62C671B11707700EE8FAD /* MBProgressHUD */,
 				0AE62C6D1B11707700EE8FAD /* MJExtension */,
 				0AE62C7F1B11707700EE8FAD /* MJRefresh */,
@@ -702,6 +716,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CB0B1C1E1B11896300AC0F90 /* RSKImageCropper */ = {
+			isa = PBXGroup;
+			children = (
+				CB0B1C1F1B11896300AC0F90 /* RSKImageCropper.h */,
+				CB0B1C201B11896300AC0F90 /* RSKImageCropViewController.h */,
+				CB0B1C211B11896300AC0F90 /* RSKImageCropViewController.m */,
+				CB0B1C221B11896300AC0F90 /* RSKImageScrollView.h */,
+				CB0B1C231B11896300AC0F90 /* RSKImageScrollView.m */,
+				CB0B1C241B11896300AC0F90 /* RSKTouchView.h */,
+				CB0B1C251B11896300AC0F90 /* RSKTouchView.m */,
+				CB0B1C261B11896300AC0F90 /* UIImage+FixOrientation.h */,
+				CB0B1C271B11896300AC0F90 /* UIImage+FixOrientation.m */,
+			);
+			path = RSKImageCropper;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -875,6 +905,7 @@
 				0AE62C611B116C7400EE8FAD /* TwoViewController.m in Sources */,
 				0AE62C401B116B6500EE8FAD /* DLTabedSlideView.m in Sources */,
 				0AE62AC01B101A1800EE8FAD /* AppDelegate.m in Sources */,
+				CB0B1C2A1B11896300AC0F90 /* RSKTouchView.m in Sources */,
 				0AE62BDF1B106D4200EE8FAD /* ZDMotionRecognizingWindow.m in Sources */,
 				0AE62C9E1B11707700EE8FAD /* MJType.m in Sources */,
 				0AE62CA41B11707700EE8FAD /* MJRefreshComponent.m in Sources */,
@@ -886,11 +917,13 @@
 				0AE62BEE1B10956C00EE8FAD /* ZDRegisterAViewController.m in Sources */,
 				0AE62CA51B11707700EE8FAD /* MJRefreshConst.m in Sources */,
 				0AE62BC21B102F8000EE8FAD /* ZDsinginViewController.m in Sources */,
+				CB0B1C281B11896300AC0F90 /* RSKImageCropViewController.m in Sources */,
 				0AE62ABD1B101A1800EE8FAD /* main.m in Sources */,
 				0AE62C201B116AC900EE8FAD /* UserCenterTableViewCell.m in Sources */,
 				0AE62CA21B11707700EE8FAD /* NSString+MJExtension.m in Sources */,
 				0AE62C5B1B116C7400EE8FAD /* OneViewController.m in Sources */,
 				0AE62C9A1B11707700EE8FAD /* MBProgressHUD.m in Sources */,
+				CB0B1C2B1B11896300AC0F90 /* UIImage+FixOrientation.m in Sources */,
 				0AE62CA01B11707700EE8FAD /* NSObject+MJKeyValue.m in Sources */,
 				0AE62CA61B11707700EE8FAD /* MJRefreshFooter.m in Sources */,
 				0AE62C241B116AC900EE8FAD /* UserInfoPhotoCell.m in Sources */,
@@ -918,6 +951,7 @@
 				0AE62C3F1B116B6500EE8FAD /* DLScrollTabbarView.m in Sources */,
 				0AE62C571B116C7400EE8FAD /* Demo1ViewController.m in Sources */,
 				0AE62BBD1B101E4C00EE8FAD /* IWTabBar.m in Sources */,
+				CB0B1C291B11896300AC0F90 /* RSKImageScrollView.m in Sources */,
 				0AE62CA91B11707700EE8FAD /* MJRefreshHeader.m in Sources */,
 				0AE62BA91B101B8900EE8FAD /* ZDControllerTool.m in Sources */,
 				0AE62CAE1B11707700EE8FAD /* UIView+MJExtension.m in Sources */,
