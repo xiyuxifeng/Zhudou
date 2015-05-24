@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserInfoViewController">
+            <connections>
+                <outlet property="quitButton" destination="fhM-cq-e2e" id="5Vh-8R-YoU"/>
+                <outlet property="tableView" destination="Rth-RG-Wpi" id="vTh-Dv-UUI"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <userGuides>
+                <userLayoutGuide location="542" affinity="minY"/>
+                <userLayoutGuide location="542" affinity="minY"/>
+                <userLayoutGuide location="160" affinity="minX"/>
+            </userGuides>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Rth-RG-Wpi">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="494"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fhM-cq-e2e">
+                    <rect key="frame" x="15" y="524" width="290" height="36"/>
+                    <color key="backgroundColor" red="0.34901960780000002" green="0.70588235290000001" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="退出" backgroundImage="quit.png">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="quitClick:" destination="-1" eventType="touchUpInside" id="44d-b5-oPj"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Rth-RG-Wpi" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ENR-YP-mQD"/>
+                <constraint firstItem="fhM-cq-e2e" firstAttribute="bottom" secondItem="Rth-RG-Wpi" secondAttribute="bottom" constant="66" id="Iq1-gF-LLN"/>
+                <constraint firstItem="Rth-RG-Wpi" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="JKn-pR-Nls"/>
+                <constraint firstAttribute="trailing" secondItem="fhM-cq-e2e" secondAttribute="trailing" constant="15" id="hu6-F1-vll"/>
+                <constraint firstItem="fhM-cq-e2e" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="mVf-Xu-TcP"/>
+                <constraint firstAttribute="bottom" secondItem="fhM-cq-e2e" secondAttribute="bottom" constant="8" id="ojb-fM-eBG"/>
+                <constraint firstAttribute="trailing" secondItem="Rth-RG-Wpi" secondAttribute="trailing" id="zBa-Pq-WMk"/>
+            </constraints>
+            <point key="canvasLocation" x="245" y="324"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="quit.png" width="290" height="36"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

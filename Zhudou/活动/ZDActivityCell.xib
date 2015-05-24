@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ZDActivityCell" rowHeight="110" id="KGk-i7-Jjw" customClass="ZDActivityCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="竹兜三周年豪华海外亲子游" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QD1-W6-0XB">
+                        <rect key="frame" x="123" y="8" width="192" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="Fqc-8y-z7D"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="      我这次申请的竹兜早教套装是免费使用的,下面跟大家分享一下,感兴趣的妈妈也可以申请试试..." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9XC-Zs-rqi">
+                        <rect key="frame" x="123" y="28" width="192" height="58"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bUZ-VH-t0y">
+                        <rect key="frame" x="123" y="89" width="30" height="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="时间">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cVl-QL-OPf">
+                        <rect key="frame" x="235" y="89" width="50" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="JTx-Sj-kXu"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="5 / 10">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U3v-IQ-VwW">
+                        <rect key="frame" x="16" y="103" width="296" height="1"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="LwQ-i2-Pug"/>
+                        </constraints>
+                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SvF-zx-28s">
+                        <rect key="frame" x="13" y="13" width="100" height="80"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="80" id="91A-vQ-Bmg"/>
+                            <constraint firstAttribute="width" constant="100" id="p8l-lC-2YH"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottomMargin" secondItem="cVl-QL-OPf" secondAttribute="bottom" id="6cb-2b-vSA"/>
+                    <constraint firstItem="9XC-Zs-rqi" firstAttribute="top" secondItem="QD1-W6-0XB" secondAttribute="bottom" id="6eK-nT-inE"/>
+                    <constraint firstItem="U3v-IQ-VwW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="9A7-rG-bUa"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="U3v-IQ-VwW" secondAttribute="trailing" id="Gvf-gy-Big"/>
+                    <constraint firstItem="9XC-Zs-rqi" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="3" id="HPp-nM-t5X"/>
+                    <constraint firstItem="QD1-W6-0XB" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="3" id="KAb-7J-cQk"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="9XC-Zs-rqi" secondAttribute="bottom" constant="15" id="Lhy-MJ-bmM"/>
+                    <constraint firstItem="9XC-Zs-rqi" firstAttribute="leading" secondItem="SvF-zx-28s" secondAttribute="trailing" constant="10" id="NYa-KU-E1x"/>
+                    <constraint firstItem="cVl-QL-OPf" firstAttribute="top" secondItem="9XC-Zs-rqi" secondAttribute="bottom" constant="3" id="Qze-R2-uXB"/>
+                    <constraint firstItem="QD1-W6-0XB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="SFM-6R-WIO"/>
+                    <constraint firstItem="SvF-zx-28s" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="UOW-lz-jbw"/>
+                    <constraint firstItem="SvF-zx-28s" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="Y06-sR-vVh"/>
+                    <constraint firstItem="cVl-QL-OPf" firstAttribute="top" secondItem="U3v-IQ-VwW" secondAttribute="bottom" constant="-15" id="ZRk-9w-rXP"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="bUZ-VH-t0y" secondAttribute="bottom" id="cNT-mj-9S6"/>
+                    <constraint firstItem="bUZ-VH-t0y" firstAttribute="leading" secondItem="SvF-zx-28s" secondAttribute="trailing" constant="10" id="gLz-S7-zlz"/>
+                    <constraint firstItem="bUZ-VH-t0y" firstAttribute="top" secondItem="9XC-Zs-rqi" secondAttribute="bottom" constant="3" id="guM-3Z-g3H"/>
+                    <constraint firstItem="QD1-W6-0XB" firstAttribute="leading" secondItem="SvF-zx-28s" secondAttribute="trailing" constant="10" id="olw-Ru-Sst"/>
+                    <constraint firstAttribute="centerX" secondItem="cVl-QL-OPf" secondAttribute="centerX" constant="-100" id="r8w-02-x62"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="detail" destination="9XC-Zs-rqi" id="qkJ-zg-wWD"/>
+                <outlet property="flagBtn" destination="cVl-QL-OPf" id="BaR-P1-Za6"/>
+                <outlet property="iconView" destination="SvF-zx-28s" id="EZv-er-OjY"/>
+                <outlet property="timeBtn" destination="bUZ-VH-t0y" id="3ae-88-uSv"/>
+                <outlet property="title" destination="QD1-W6-0XB" id="T6c-JZ-vaC"/>
+            </connections>
+            <point key="canvasLocation" x="502" y="288"/>
+        </tableViewCell>
+    </objects>
+</document>
