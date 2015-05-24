@@ -7,22 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "F_AnimationView.h"
-#import "F_MusicView.h"
-#import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
 
 @interface OneViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
-{
-    MPMoviePlayerController *player;
-    UITableView *animationTableView;
+{ 
+//    UITableView *animationTableView;
     UITableView *musicTableView;
     UIView *musicPlayView;
     AVAudioPlayer *musicPlayer;
     UIProgressView *progressV;      //播放进度
     NSTimer *timer;                 //监控音频播放进度
-    UILabel *AVPlayerTime;
-    UIButton *musicSwitch;
+    UILabel *AVPlayerTime;          //播放进度显示时间
+    UIButton *musicSwitch;          //播放/暂停
 }
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *Segmented_AM;
