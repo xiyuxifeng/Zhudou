@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0AA2D3561B117CDB005413D6 /* IKHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2D3531B117CDB005413D6 /* IKHttpTool.m */; };
+		0AA2D3571B117CDB005413D6 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2D3551B117CDB005413D6 /* Reachability.m */; };
 		0AE62ABD1B101A1800EE8FAD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE62ABC1B101A1800EE8FAD /* main.m */; };
 		0AE62AC01B101A1800EE8FAD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE62ABF1B101A1800EE8FAD /* AppDelegate.m */; };
 		0AE62AC81B101A1800EE8FAD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AE62AC71B101A1800EE8FAD /* Images.xcassets */; };
@@ -118,6 +120,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0AA2D3521B117CDB005413D6 /* IKHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKHttpTool.h; sourceTree = "<group>"; };
+		0AA2D3531B117CDB005413D6 /* IKHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKHttpTool.m; sourceTree = "<group>"; };
+		0AA2D3541B117CDB005413D6 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		0AA2D3551B117CDB005413D6 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		0AE62AB71B101A1800EE8FAD /* Zhudou.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zhudou.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AE62ABB1B101A1800EE8FAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AE62ABC1B101A1800EE8FAD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -543,6 +549,10 @@
 		0AE62B691B101A9F00EE8FAD /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				0AA2D3521B117CDB005413D6 /* IKHttpTool.h */,
+				0AA2D3531B117CDB005413D6 /* IKHttpTool.m */,
+				0AA2D3541B117CDB005413D6 /* Reachability.h */,
+				0AA2D3551B117CDB005413D6 /* Reachability.m */,
 				0AE62BA71B101B8900EE8FAD /* ZDControllerTool.h */,
 				0AE62BA81B101B8900EE8FAD /* ZDControllerTool.m */,
 			);
@@ -885,6 +895,7 @@
 				0AE62C591B116C7400EE8FAD /* F_AnimationView.m in Sources */,
 				0AE62C131B116AC900EE8FAD /* AboutUSViewController.m in Sources */,
 				0AE62C3C1B116B6500EE8FAD /* DLCustomSlideView.m in Sources */,
+				0AA2D3561B117CDB005413D6 /* IKHttpTool.m in Sources */,
 				0AE62C261B116AC900EE8FAD /* UserInfoViewController.m in Sources */,
 				0AE62BD01B10466100EE8FAD /* ZDActivityCell.m in Sources */,
 				0AE62CAC1B11707700EE8FAD /* UIScrollView+MJExtension.m in Sources */,
@@ -942,6 +953,7 @@
 				0AE62CAE1B11707700EE8FAD /* UIView+MJExtension.m in Sources */,
 				0AE62CA11B11707700EE8FAD /* NSObject+MJProperty.m in Sources */,
 				0AE62BB11B101E1C00EE8FAD /* ZDNavigationController.m in Sources */,
+				0AA2D3571B117CDB005413D6 /* Reachability.m in Sources */,
 				0AE62C171B116AC900EE8FAD /* DownloadCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
