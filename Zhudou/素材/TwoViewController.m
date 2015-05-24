@@ -179,6 +179,35 @@
 - (void)cellMvUpDataButClick:(UIButton *)btn
 {
     NSLog(@"btn.tag UpData = %d",(int)btn.tag);
+    if (customAlertView == nil) {
+        customAlertView = [[UIAlertView alloc] initWithTitle:@"亲，请您输入购买竹兜教套里的激活码，后获取父母用书。" message:nil delegate:self cancelButtonTitle:@"获取" otherButtonTitles:@"取消", nil ];
+    }
+    
+    [customAlertView setAlertViewStyle:UIAlertViewStyleSecureTextInput];
+    
+    UITextField *nameField = [customAlertView textFieldAtIndex:0];
+    
+    nameField.placeholder = @"请输入激活码";
+    
+    [customAlertView show];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == alertView.cancelButtonIndex)
+    {
+        UITextField *textField = [alertView textFieldAtIndex:0];
+        NSString *nameField = textField.text;
+        
+        if (nameField.length > 0)
+        {
+            
+        }
+        else
+        {
+            [MBProgressHUD showError:@"激活码不能为空！" toView:self.view];
+        }
+    }
 }
 
 

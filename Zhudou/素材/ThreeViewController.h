@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ThreeViewController : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@interface ThreeViewController : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout, UIAlertViewDelegate>
+{
+    UIAlertView *customAlertView;
+} 
 
 @end
