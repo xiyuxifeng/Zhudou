@@ -56,9 +56,9 @@
     
     [self.view addSubview:tableView];
     
-    NSString *urlStr = @"link";
+    NSString *urlStr = @"article/articlelist.do";
     
-    [IKHttpTool postWithURL:urlStr params: @{@"colid":@"4"} success:^(id JSON) {
+    [IKHttpTool postWithURL:urlStr params: @{@"colid":@"0",} success:^(id JSON) {
                                            NSLog(@"JSON = %@",JSON);
                                            [tableViewDataArr removeAllObjects];
                                            tableViewDataArr = [JSON valueForKey:@"res_data"];

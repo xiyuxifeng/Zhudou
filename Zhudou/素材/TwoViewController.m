@@ -76,10 +76,11 @@
 {
     
     static NSString *CellWithIdentifier = @"Cell";
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellWithIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellWithIdentifier];
-    }
+    
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellWithIdentifier];
+     
     NSUInteger row = [indexPath row];
     
     //动画预览图
@@ -180,7 +181,14 @@
     [upDataImage addTarget:self action:@selector(cellMvUpDataButClick:) forControlEvents:UIControlEventTouchUpInside];
     
     //设置button填充图片
-    [upDataImage setBackgroundImage:[UIImage imageNamed:@"下载.png"] forState:UIControlStateNormal];
+    if ([MBProgressHUD findDocumentsFile:[[musicArr objectAtIndex:row] valueForKey:@"filePath"]])
+    {
+        [upDataImage setBackgroundImage:[UIImage imageNamed:@"暂停.png"] forState:UIControlStateNormal];
+    }
+    else
+    {
+        [upDataImage setBackgroundImage:[UIImage imageNamed:@"下载.png"] forState:UIControlStateNormal];
+    }
     
     [cell addSubview:upDataImage];
     
@@ -193,7 +201,6 @@
     upDataTitle.text = [NSString stringWithFormat:@"%@",[[musicArr objectAtIndex:row] valueForKey:@"downloadCount"]];
     
     [cell addSubview:upDataTitle];
-    
     
     return cell;
 }
@@ -208,16 +215,33 @@
 //动画收藏
 - (void)cellMvShouCangButClick:(UIButton *)btn
 {
-    NSLog(@"btn.tag 收藏 = %d",(int)btn.tag);
+    NSString *urlStr = @"user/addfavorite.do";
+    
+    [IKHttpTool postWithURL:urlStr params:@{@"resid":[[musicArr objectAtIndex:btn.tag] valueForKey:@"materialId"],@"restitle":[[musicArr objectAtIndex:btn.tag] valueForKey:@"title"],@"restype":[[musicArr objectAtIndex:btn.tag] valueForKey:@"materialType"]} success:^(id JSON)
+     {
+         NSLog(@"JSON = %@",JSON);
+         
+     }
+     failure:^(NSError *error)
+     {
+         NSLog(@"error%@",error);
+     }];
 }
 
 //动画下载
 - (void)cellMvUpDataButClick:(UIButton *)btn
 {
-    NSLog(@"btn.tag UpData = %d",(int)btn.tag);
+    if ([MBProgressHUD findDocumentsFile:[[musicArr objectAtIndex:btn.tag] valueForKey:@"filePath"]])
+    {
+        //文件存在，直接播放。
+        //此处添加播放的代码。
+        return;
+    }
+
     if (customAlertView == nil) {
         customAlertView = [[UIAlertView alloc] initWithTitle:@"亲，请您输入购买竹兜教套里的激活码，后获取父母用书。" message:nil delegate:self cancelButtonTitle:@"获取" otherButtonTitles:@"取消", nil ];
     }
+    customAlertView.tag = btn.tag;
     
     [customAlertView setAlertViewStyle:UIAlertViewStyleSecureTextInput];
     
@@ -228,6 +252,8 @@
     [customAlertView show];
 }
 
+
+
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == alertView.cancelButtonIndex)
@@ -237,7 +263,24 @@
         
         if (nameField.length > 0)
         {
-            
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                
+                NSURL *surl = [NSURL URLWithString:[NSString stringWithFormat:@"http://182.92.96.117:8080/zhudou/material/playfreematerial.do?materialid=%@",[[musicArr objectAtIndex:customAlertView.tag] valueForKey:@"materialId"]]];
+                
+                NSData * audioData = [NSData dataWithContentsOfURL:surl];
+                
+                //将数据保存到本地指定位置
+                NSString *docDirPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                NSString *filePath = [NSString stringWithFormat:@"%@/%@", docDirPath ,[[musicArr objectAtIndex:customAlertView.tag] valueForKey:@"filePath"]];
+                [audioData writeToFile:filePath atomically:YES];
+                
+                //通知主线程刷新
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    //刷新TableView 下载记录。
+                    [animationTableView reloadData];
+                });
+                
+            });
         }
         else
         {

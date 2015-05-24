@@ -13,6 +13,7 @@
 {
     UIAlertView *customAlertView;
     NSMutableArray *musicArr;
+    UICollectionView *studyBook;
 } 
 
 @end

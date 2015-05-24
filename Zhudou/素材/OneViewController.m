@@ -86,14 +86,14 @@
     [self.view addSubview:musicPlayView];
     
     //是否收藏过？
-    UIImageView *music_ImageView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 12, 50, 50)];
+    music_ImageView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 12, 50, 50)];
     
     music_ImageView.image = [UIImage imageNamed:@"QQ图片20150419133143.png"];
     
     [musicPlayView addSubview:music_ImageView];
     
     //音乐的名字
-    UILabel *musicTitle = [[UILabel alloc]initWithFrame:CGRectMake(80, 12, 150, 20)];
+    musicTitle = [[UILabel alloc]initWithFrame:CGRectMake(80, 12, 150, 20)];
     
     musicTitle.font = [UIFont systemFontOfSize: 13.0];
     
@@ -118,7 +118,7 @@
                                                                     inDirectory:@"/"]]
                    error:&err ];//使用本地URL创建
     
-    [musicPlayer prepareToPlay];//分配播放所需的资源，并将其加入内部播放队列
+//    [musicPlayer prepareToPlay];//分配播放所需的资源，并将其加入内部播放队列
     
 
     //初始化一个播放进度条
@@ -235,6 +235,9 @@
 - (void)play
 {
     [musicPlayer play];
+    
+    musicSwitch.tag = 1;
+    [musicSwitch setBackgroundImage:[UIImage imageNamed:@"按钮2.png"] forState:UIControlStateNormal];
 }
 
 //暂停
@@ -312,9 +315,7 @@
     static NSString *CellWithIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellWithIdentifier];
     
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellWithIdentifier];
-    }
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellWithIdentifier];
     
     NSUInteger row = [indexPath row];
     
@@ -339,13 +340,13 @@
         
         
         //音乐的名字
-        UILabel *musicTitle = [[UILabel alloc]initWithFrame:CGRectMake(45, 10, 150, 20)];
+        UILabel *cellMusicTitle = [[UILabel alloc]initWithFrame:CGRectMake(45, 10, 150, 20)];
         
-        musicTitle.font = [UIFont systemFontOfSize: 13.0];
+        cellMusicTitle.font = [UIFont systemFontOfSize: 13.0];
         
-        musicTitle.text = [[musicArr objectAtIndex:row] valueForKey:@"title"];
+        cellMusicTitle.text = [[musicArr objectAtIndex:row] valueForKey:@"title"];
         
-        [cell addSubview:musicTitle];
+        [cell addSubview:cellMusicTitle];
         
         //发布时间
         UIImageView *releaseTimeImageView = [[UIImageView alloc]initWithFrame:CGRectMake(45, 35, 18, 18)];
@@ -378,7 +379,16 @@
         [upDataImage addTarget:self action:@selector(cellMusicUpDataButClick:) forControlEvents:UIControlEventTouchUpInside];
         
         //设置button填充图片
-        [upDataImage setBackgroundImage:[UIImage imageNamed:@"下载.png"] forState:UIControlStateNormal];
+        
+        
+        if ([MBProgressHUD findDocumentsFile:[[musicArr objectAtIndex:row] valueForKey:@"filePath"]])
+        { 
+            [upDataImage setBackgroundImage:[UIImage imageNamed:@"暂停.png"] forState:UIControlStateNormal];
+        }
+        else
+        {
+            [upDataImage setBackgroundImage:[UIImage imageNamed:@"下载.png"] forState:UIControlStateNormal];
+        }
         
         [cell addSubview:upDataImage];
         
@@ -422,40 +432,97 @@
     
 }
 
-//动画播放
-- (void)cellMvPlayButClick:(UIButton *)btn
-{
-    NSLog(@"btn.tag Play = %d",(int)btn.tag);
-}
-
-//动画收藏
-- (void)cellMvShouCangButClick:(UIButton *)btn
-{
-    NSLog(@"btn.tag 收藏 = %d",(int)btn.tag);
-}
-
-//动画下载
-- (void)cellMvUpDataButClick:(UIButton *)btn
-{
-    NSLog(@"btn.tag UpData = %d",(int)btn.tag);
-}
-
 //音乐收藏
 - (void)cellMusicShouCangButClick:(UIButton *)btn
 {
-    NSLog(@"btn.tag 收藏 = %d",(int)btn.tag);
+    NSString *urlStr = @"user/addfavorite.do";
+    
+    [IKHttpTool postWithURL:urlStr params:@{@"resid":[[musicArr objectAtIndex:btn.tag] valueForKey:@"materialId"],@"restitle":[[musicArr objectAtIndex:btn.tag] valueForKey:@"title"],@"restype":[[musicArr objectAtIndex:btn.tag] valueForKey:@"materialType"]} success:^(id JSON)
+     {
+         NSLog(@"JSON = %@",JSON);
+         
+     }
+     failure:^(NSError *error)
+     {
+         NSLog(@"error%@",error);
+     }];
+
 }
 
 //音乐播放
 - (void)cellMusicPlayButClick:(UIButton *)btn
 {
-    NSLog(@"btn.tag Play = %d",(int)btn.tag);
+    [self stop];
+    
+    AVPlayerTime.text = @"0.00 / 0.00";
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://182.92.96.117:8080/zhudou/%@",[[musicArr objectAtIndex:btn.tag] valueForKey:@"titlePic"]]];
+    
+    music_ImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+    
+    musicTitle.text = [[musicArr objectAtIndex:(int)btn.tag] valueForKey:@"title"];
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        
+        NSError* err;
+        
+        NSURL *surl = [NSURL URLWithString:[NSString stringWithFormat:@"http://182.92.96.117:8080/zhudou/material/playfreematerial.do?materialid=%@",[[musicArr objectAtIndex:btn.tag] valueForKey:@"materialId"]]];
+    
+        NSData * audioData = [NSData dataWithContentsOfURL:surl];
+        
+        //将数据保存到本地指定位置
+        NSString *docDirPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString *filePath = [NSString stringWithFormat:@"%@/%@.mp3", docDirPath , @"temp"];
+        [audioData writeToFile:filePath atomically:YES];
+        
+        //播放本地音乐
+        NSURL *fileURL = [NSURL fileURLWithPath:filePath];
+        
+        musicPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:fileURL error:&err ];//使用本地URL创建
+        
+        [musicPlayer prepareToPlay];
+        
+        [musicPlayer play];
+        
+        //通知主线程刷新
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            musicSwitch.tag = 1;
+            
+            [musicSwitch setBackgroundImage:[UIImage imageNamed:@"按钮2.png"] forState:UIControlStateNormal];
+        });
+    });
 }
 
 //音乐下载
 - (void)cellMusicUpDataButClick:(UIButton *)btn
 {
-    NSLog(@"btn.tag UpData = %d",(int)btn.tag);
+    if ([MBProgressHUD findDocumentsFile:[[musicArr objectAtIndex:btn.tag] valueForKey:@"filePath"]])
+    {
+        //文件存在，直接播放。
+        //此处添加播放的代码。
+        return;
+    }
+
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        
+        NSURL *surl = [NSURL URLWithString:[NSString stringWithFormat:@"http://182.92.96.117:8080/zhudou/material/playfreematerial.do?materialid=%@",[[musicArr objectAtIndex:btn.tag] valueForKey:@"materialId"]]];
+        
+        NSData * audioData = [NSData dataWithContentsOfURL:surl];
+        
+        //将数据保存到本地指定位置
+        NSString *docDirPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString *filePath = [NSString stringWithFormat:@"%@/%@", docDirPath ,[[musicArr objectAtIndex:btn.tag] valueForKey:@"filePath"]];
+        [audioData writeToFile:filePath atomically:YES];
+        
+        //通知主线程刷新
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //刷新TableView 下载记录。
+            [musicTableView reloadData];
+        });
+        
+    });
+
 }
 
 - (void)dealloc{

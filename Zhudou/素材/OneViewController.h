@@ -21,6 +21,9 @@
     UILabel *AVPlayerTime;          //播放进度显示时间
     UIButton *musicSwitch;          //播放/暂停
     
+    UIImageView *music_ImageView;
+    UILabel *musicTitle;
+    
     NSMutableArray *musicArr;
 }
 

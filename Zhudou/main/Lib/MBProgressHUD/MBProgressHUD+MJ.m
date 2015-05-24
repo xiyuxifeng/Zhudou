@@ -74,4 +74,21 @@
 {
     [self hideHUDForView:nil];
 }
+
++(BOOL)findDocumentsFile:(NSString *)fileName
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    //在这里获取应用程序Documents文件夹里的文件及文件夹列表
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSError *error = nil;
+    NSArray *fileList = [[NSArray alloc] init];
+    fileList = [fileManager contentsOfDirectoryAtPath:path error:&error];
+    
+    for (NSString *str in fileList) {
+        if ([str isEqualToString:fileName]) {
+            return YES;
+        }
+    }
+    return NO;
+}
 @end
