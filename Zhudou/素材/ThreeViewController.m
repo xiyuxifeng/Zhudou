@@ -110,7 +110,7 @@
     [tui setTitleColor:[UIColor blackColor]forState:UIControlStateNormal];
     
     // 给button添加事件
-//    [tui addTarget:self action:@selector(SwitchClick:) forControlEvents:UIControlEventTouchUpInside];
+    [tui addTarget:self action:@selector(SwitchClick:) forControlEvents:UIControlEventTouchUpInside];
     
     //设置button填充图片
     [tui setBackgroundImage:[UIImage imageNamed:@"下载.png"] forState:UIControlStateNormal];
@@ -161,6 +161,39 @@
 -(BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return YES;
+}
+
+- (void)SwitchClick:(UIButton *)btn
+{
+    if (customAlertView == nil) {
+        customAlertView = [[UIAlertView alloc] initWithTitle:@"亲，请您输入购买竹兜教套里的激活码，后获取父母用书。" message:nil delegate:self cancelButtonTitle:@"获取" otherButtonTitles:@"取消", nil ];
+    }
+    
+    [customAlertView setAlertViewStyle:UIAlertViewStyleSecureTextInput];
+    
+    UITextField *nameField = [customAlertView textFieldAtIndex:0];
+    
+    nameField.placeholder = @"请输入激活码";
+    
+    [customAlertView show];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == alertView.cancelButtonIndex)
+    {
+        UITextField *textField = [alertView textFieldAtIndex:0];
+        NSString *nameField = textField.text;
+        
+        if (nameField.length > 0)
+        {
+            
+        }
+        else
+        {
+            [MBProgressHUD showError:@"激活码不能为空！" toView:self.view];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning{

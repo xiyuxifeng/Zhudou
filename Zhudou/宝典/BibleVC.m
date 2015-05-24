@@ -17,17 +17,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor whiteColor];
+    
     tableViewDataArr = [[NSArray alloc] init];
     
     imageView = [[UIImageView alloc]init];
     scrollView = [[UIScrollView alloc]init];
     tableView = [[UITableView alloc]init];
     
-    imageView.frame = CGRectMake(0, 22, [[UIScreen mainScreen] bounds].size.width, 165);
+    imageView.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 165);
     
     imageView.image = [UIImage imageNamed:@"宝典图片.png"];
     
-    scrollView.frame = CGRectMake(0, 187, [[UIScreen mainScreen] bounds].size.width, 71);
+    scrollView.frame = CGRectMake(0, 165, [[UIScreen mainScreen] bounds].size.width, 71);
     
     scrollView.scrollEnabled = YES;
     
@@ -35,7 +37,7 @@
     
     scrollView.contentSize = CGSizeMake([[UIScreen mainScreen] bounds].size.width / 4 * 5, scrollView.frame.size.height); 
     
-    tableView.frame = CGRectMake(0, 258, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height - 302);
+    tableView.frame = CGRectMake(0, 236, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height - 302);
     
     [tableView setDelegate:self];
     

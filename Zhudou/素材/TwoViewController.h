@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MBProgressHUD+MJ.h"
 
-@interface TwoViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+@interface TwoViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate>
 {
     UITableView *animationTableView;
+    UIAlertView *customAlertView;
 }
 
 @end
