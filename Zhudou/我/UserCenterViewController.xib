@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -26,6 +26,9 @@
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gengduo.png" translatesAutoresizingMaskIntoConstraints="NO" id="mra-9P-onk">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="162"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="162" id="QYS-x0-iAz"/>
+                            </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="点击更换背景" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S4U-rs-4AV">
                             <rect key="frame" x="230" y="10" width="80" height="16"/>
@@ -73,12 +76,15 @@
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="qN3-8o-Sfd" secondAttribute="trailing" constant="10" id="02f-pk-OIK"/>
+                        <constraint firstItem="mra-9P-onk" firstAttribute="top" secondItem="SrO-Pa-xIh" secondAttribute="top" id="Jhu-CI-lSE"/>
                         <constraint firstAttribute="trailing" secondItem="S4U-rs-4AV" secondAttribute="trailing" constant="10" id="YgQ-4D-Kve"/>
                         <constraint firstItem="S4U-rs-4AV" firstAttribute="top" secondItem="SrO-Pa-xIh" secondAttribute="top" constant="10" id="ZsI-vF-yZs"/>
                         <constraint firstItem="mra-9P-onk" firstAttribute="top" secondItem="SrO-Pa-xIh" secondAttribute="top" id="ayo-iK-Jf4"/>
                         <constraint firstItem="yDk-5D-ZdR" firstAttribute="leading" secondItem="SrO-Pa-xIh" secondAttribute="leading" constant="16" id="b12-2Q-V0h"/>
                         <constraint firstAttribute="height" constant="200" id="cgX-KV-Suj"/>
+                        <constraint firstItem="mra-9P-onk" firstAttribute="leading" secondItem="SrO-Pa-xIh" secondAttribute="leading" id="ePF-xq-LHl"/>
                         <constraint firstItem="mra-9P-onk" firstAttribute="leading" secondItem="SrO-Pa-xIh" secondAttribute="leading" id="fSe-no-yEX"/>
+                        <constraint firstAttribute="trailing" secondItem="mra-9P-onk" secondAttribute="trailing" id="fof-fZ-rQ5"/>
                         <constraint firstItem="qN3-8o-Sfd" firstAttribute="top" secondItem="mra-9P-onk" secondAttribute="bottom" id="fyy-wh-qwg"/>
                         <constraint firstItem="JKw-ze-zOy" firstAttribute="top" secondItem="mra-9P-onk" secondAttribute="bottom" constant="1" id="o2K-bm-naK"/>
                         <constraint firstItem="qN3-8o-Sfd" firstAttribute="leading" secondItem="JKw-ze-zOy" secondAttribute="trailing" constant="10" id="o3r-XP-wgJ"/>

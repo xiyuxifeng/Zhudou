@@ -35,9 +35,10 @@
     self.tableView.dataSource = self;
 
 }
+
 - (IBAction)quitClick:(UIButton *)sender {
     
-    NSLog(@"退出");
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

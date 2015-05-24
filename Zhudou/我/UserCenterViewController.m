@@ -16,9 +16,10 @@
 #import "SettingViewController.h"
 
 
-static NSString *reuseId = @"resueCellId";
+#define ACTION_SHEET_PHOTO_TAG 1233
+#define BACKGROUND_IMAGE @"backgroundImage"
 
-@interface UserCenterViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface UserCenterViewController ()<UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *moreImage;
 @property (weak, nonatomic) IBOutlet UIImageView *userImage;
@@ -63,25 +64,98 @@ static NSString *reuseId = @"resueCellId";
     [self.userImage addGestureRecognizer:tapUserInfo];
     self.userImage.userInteractionEnabled = YES;
     
+    // 设置背景图片
+    NSData *imageData = [[NSUserDefaults standardUserDefaults] objectForKey:BACKGROUND_IMAGE];
     
+    if(imageData != nil)
+    {
+        self.moreImage.image = [NSKeyedUnarchiver unarchiveObjectWithData:imageData];
+    }
 }
 
-#pragma mark - Method
+#pragma mark - Change Picture Method
 
 // 背景
 - (void)changeImage: (UITapGestureRecognizer *)tap
 {
-    NSLog(@"改变图片");
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从照片库中选择", nil];
+    actionSheet.delegate = self;
+    [actionSheet showInView:self.view];
 }
 
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 2) {
+        return;
+    }
+    
+    [self takePhoto:buttonIndex];
+}
+
+- (void)takePhoto:(NSInteger)type {
+    UIImagePickerController *picker = [[UIImagePickerController alloc]init];
+    UIImagePickerControllerSourceType sourcheType;
+    if (type == 0) {
+        sourcheType = UIImagePickerControllerSourceTypeCamera;
+    } else {
+        sourcheType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    
+    picker.sourceType = sourcheType;
+    //picker.showsCameraControls = YES;
+    picker.delegate = self;
+    picker.allowsEditing = NO;
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+#pragma mark - Photo Library delegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+        //修正图片为方形
+        UIImage *source_Img = [info objectForKey:UIImagePickerControllerOriginalImage];
+        float h = source_Img.size.height;
+        float w = source_Img.size.width;
+        
+        CGRect targetRect;
+        if (w > h) {  //(w-h)/2  --> w-(w-h)/2
+            targetRect = CGRectMake((w-h)/2, 0, h, h);
+        }
+        else {
+            targetRect = CGRectMake(0, (h-w)/2, w, w);
+        }
+        
+        CGImageRef imageRef = CGImageCreateWithImageInRect(source_Img.CGImage, targetRect);
+        UIImage *resultImage = [UIImage imageWithCGImage:imageRef];
+        CGImageRelease(imageRef);
+        
+        //修正回原scale和方向
+        resultImage = [UIImage imageWithCGImage:resultImage.CGImage scale:source_Img.scale orientation:source_Img.imageOrientation];
+        
+        //NSLog(@"%.0f",resultImage.size.height);
+        //NSLog(@"%.0f",resultImage.size.height);
+        self.moreImage.image = resultImage;
+    
+        // create NSData-object from image
+        NSData *imageData = [NSKeyedArchiver archivedDataWithRootObject:resultImage];
+        // save NSData-object to UserDefaults
+        [[NSUserDefaults standardUserDefaults] setObject:imageData forKey:BACKGROUND_IMAGE];
+    }];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+#pragma mark - Other Method
 // 用户详情
 - (void)userInfo: (UITapGestureRecognizer *)tap
 {
     UserInfoViewController *userInfo = [[UserInfoViewController alloc] init];
     [self.navigationController pushViewController:userInfo animated:YES];
 }
-
-
 
 #pragma mark - tabelView delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -115,6 +189,7 @@ static NSString *reuseId = @"resueCellId";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    static NSString *reuseId = @"resueCellId";
     UserCenterTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"UserCenterTableViewCell" owner:self options:nil] lastObject];
@@ -170,6 +245,9 @@ static NSString *reuseId = @"resueCellId";
 }
 
 - (IBAction)playList:(UIButton *)sender {
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
