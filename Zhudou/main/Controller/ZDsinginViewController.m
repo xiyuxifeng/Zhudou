@@ -11,6 +11,7 @@
 #import "ZDNavigationController.h"
 
 @interface ZDsinginViewController ()
+
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumText;
 @property (weak, nonatomic) IBOutlet UITextField *passWordText;
 
